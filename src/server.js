@@ -2,6 +2,7 @@ require("dotenv").config();
 
 //secruity package
 const helmet = require("helmet");
+const cors = require("cors");
 const express = require("express");
 const connectDB = require("./db/connect");
 
@@ -12,6 +13,12 @@ const userRoutes = require("./routes/user");
 const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ["https://dailygram2023.onrender.com"],
+  })
+);
 app.use(express.json());
 
 app.use(helmet());

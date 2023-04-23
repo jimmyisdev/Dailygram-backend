@@ -17,6 +17,8 @@ const app = express();
 app.use(
   cors({
     origin: ["https://dailygram2023.onrender.com"],
+    Credential: true,
+    methods:["GET", "POST","DELETE","PUT","OPTION"]
   })
 );
 app.use(express.json());

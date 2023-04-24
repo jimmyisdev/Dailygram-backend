@@ -16,15 +16,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://dailygram2023.onrender.com"],
+    origin: ["https://dailygram2023.onrender.com", "http://localhost:3000"],
     optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "DELETE", "PUT", "OPTION"],
     credentials: true,
-    methods:["GET", "POST","DELETE","PUT","OPTION"],
-    
   })
 );
 app.use(express.json());
-
 app.use(helmet());
 
 app.use((req, res, next) => {

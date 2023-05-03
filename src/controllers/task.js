@@ -1,21 +1,23 @@
-const Task = require("../models/Task");
 const mongoose = require("mongoose");
+const Task = require("../models/Task");
 
 const getAllTasks = async (req, res) => {
   const queryObject = req.query;
   try {
     const user_id = req.user.userId;
-    const tasks = await Task.find({ createdBy: user_id }).sort({
-      createdAt: -1,
-    });
     if (Object.keys(queryObject).length === 0) {
+      const tasks = await Task.find({ createdBy: user_id }).sort({
+        createdAt: -1,
+      });
       res.status(200).json({ tasks });
     } else {
-      const { level, status } = queryObject;
-      let filteredTasks = await tasks
-        .filter((item) => Number(item.isCompleted) === Number(status))
-        .filter((item) => item.level === level);
-      res.status(200).json({ tasks: filteredTasks });
+      const tasks = await Task.find({
+        createdBy: user_id,
+        ...queryObject,
+      }).sort({
+        createdAt: -1,
+      });
+      res.status(200).json({ tasks });
     }
   } catch (error) {
     res.status(404).json({ message: error.message });

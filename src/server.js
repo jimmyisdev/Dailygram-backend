@@ -14,6 +14,12 @@ const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
 
+function errorHandler(err, res) {
+  if (err) {
+    res.status(500).json({ error: "Server is broken, please later try again" });
+  }
+}
+
 app.use(
   cors({
     origin: ["https://dailygram2023.onrender.com", "http://localhost:3000"],
@@ -35,6 +41,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/expenditures", requireAuth, expendituresRoutes);
 app.use("/api/v1/tasks", requireAuth, tasksRoutes);
 app.use("/api/v1/peopleMemos", requireAuth, peopleMemosRoutes);
+app.use(errorHandler);
 
 //connect DB  && run server
 const port = process.env.PORT || 4000;

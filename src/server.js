@@ -22,7 +22,7 @@ function errorHandler(err, res) {
 
 app.use(
   cors({
-    origin: ["https://dailygram2023.onrender.com", "http://localhost:3000"],
+    origin: "https://dailygram2023.onrender.com",
     optionsSuccessStatus: 200,
     methods: ["GET", "POST", "DELETE", "PUT", "OPTION"],
     credentials: true,
